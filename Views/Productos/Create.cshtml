@@ -1,0 +1,12 @@
+@model Producto
+@{ ViewData["Title"] = "Nuevo producto"; }
+<h1 class="h2 mb-3">Registrar producto</h1>
+<div class="card shadow-sm"><div class="card-body">
+@if (ViewBag.ProveedorId is SelectList lista && !lista.Any()) { <div class="alert alert-warning">Primero debes registrar al menos un proveedor.</div> }
+<form asp-action="Create" method="post">
+    <partial name="_Form" model="Model" />
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

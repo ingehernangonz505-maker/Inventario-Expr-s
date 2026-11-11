@@ -1,0 +1,69 @@
+@model ControlInventarioExpress.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Detalles del Proveedor";
+}
+
+<div class="container mt-4">
+    <h2>Detalles del Proveedor</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9 fw-bold">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">RUC</dt>
+        <dd class="col-sm-9">@(Model.Ruc ?? "-")</dd>
+
+        <dt class="col-sm-3">Teléfono</dt>
+        <dd class="col-sm-9">@(Model.Telefono ?? "-")</dd>
+
+        <dt class="col-sm-3">Correo Electrónico</dt>
+        <dd class="col-sm-9">@(Model.Correo ?? "-")</dd>
+
+        <dt class="col-sm-3">Dirección</dt>
+        <dd class="col-sm-9">@(Model.Direccion ?? "-")</dd>
+
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">
+            @if (Model.Estado)
+            {
+                <span class="badge bg-success">Activo</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Inactivo</span>
+            }
+        </dd>
+    </dl>
+
+    @if (Model.Productos != null && Model.Productos.Any())
+    {
+        <h4 class="mt-4">Productos Asociados</h4>
+        <table class="table table-sm table-bordered bg-white mt-2">
+            <thead class="table-light">
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Precio Venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var prod in Model.Productos)
+                {
+                    <tr>
+                        <td>@prod.Nombre</td>
+                        <td>@(prod.Categoria ?? "-")</td>
+                        <td>@prod.Stock</td>
+                        <td>@prod.PrecioVenta.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+html { font-size: 14px; position: relative; min-height: 100%; }
+@media (min-width: 768px) { html { font-size: 16px; } }
+body { background: #f5f7fb; color: #1f2937; margin-bottom: 70px; }
+.navbar-brand { letter-spacing: .2px; }
+.stat-card { border: 0; border-left: 4px solid #2563eb; box-shadow: 0 .125rem .5rem rgba(0,0,0,.06); }
+.card { border: 0; border-radius: .8rem; }
+.table thead th { background: #f8fafc; color: #475569; font-size: .9rem; }
+.btn { border-radius: .5rem; }
+footer { background: #fff; }

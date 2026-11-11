@@ -1,0 +1,28 @@
+@model ControlInventarioExpress.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Producto</h2>
+    <div class="alert alert-warning">¿Estás seguro de que deseas eliminar este producto?</div>
+    <dl class="row">
+        <dt class="col-sm-3">Producto</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Proveedor</dt>
+        <dd class="col-sm-9">@Model.Proveedor?.Nombre</dd>
+
+        <dt class="col-sm-3">Stock</dt>
+        <dd class="col-sm-9">@Model.Stock</dd>
+
+        <dt class="col-sm-3">Precio de Venta</dt>
+        <dd class="col-sm-9">@Model.PrecioVenta.ToString("C")</dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

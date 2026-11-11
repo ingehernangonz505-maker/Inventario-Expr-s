@@ -1,0 +1,67 @@
+@model IEnumerable<ControlInventarioExpress.Models.Producto>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container mt-4">
+    <div class="mb-4">
+        <h1 class="fw-bold">Control de Inventario Express</h1>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-primary text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase">Total Productos</h6>
+                    <h2 class="fw-bold">@(ViewBag.TotalProductos ?? Model.Count())</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-success text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase">Valor en Inventario (Venta)</h6>
+                    <h2 class="fw-bold">@Model.Sum(p => p.PrecioVenta * p.Stock).ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-info text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase">Total Proveedores</h6>
+                    <h2 class="fw-bold">@(ViewBag.TotalProveedores ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-bold">Inventario Actual</div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Proveedor</th>
+                        <th>Stock</th>
+                        <th>Precio Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@item.Nombre</td>
+                            <td>@(item.Categoria ?? "-")</td>
+                            <td>@item.Proveedor?.Nombre</td>
+                            <td>@item.Stock</td>
+                            <td class="text-success fw-bold">@item.PrecioVenta.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

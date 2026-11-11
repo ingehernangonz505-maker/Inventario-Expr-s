@@ -1,0 +1,37 @@
+@model ControlInventarioExpress.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+<div class="container mt-4">
+    <h2>Detalles del Producto</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Producto</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Categoría</dt>
+        <dd class="col-sm-9">@(Model.Categoria ?? "-")</dd>
+
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9">@(Model.Descripcion ?? "-")</dd>
+
+        <dt class="col-sm-3">Precio de Compra</dt>
+        <dd class="col-sm-9">@Model.PrecioCompra.ToString("C")</dd>
+
+        <dt class="col-sm-3">Precio de Venta</dt>
+        <dd class="col-sm-9">@Model.PrecioVenta.ToString("C")</dd>
+
+        <dt class="col-sm-3">Stock</dt>
+        <dd class="col-sm-9">@Model.Stock</dd>
+
+        <dt class="col-sm-3">Vencimiento</dt>
+        <dd class="col-sm-9">@(Model.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "N/A")</dd>
+
+        <dt class="col-sm-3">Proveedor</dt>
+        <dd class="col-sm-9">@Model.Proveedor?.Nombre</dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>

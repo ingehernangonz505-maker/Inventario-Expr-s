@@ -1,0 +1,11 @@
+@model Proveedor
+@{ ViewData["Title"] = "Nuevo proveedor"; }
+<h1 class="h2 mb-3">Registrar proveedor</h1>
+<div class="card shadow-sm"><div class="card-body">
+<form asp-action="Create" method="post">
+    <partial name="_Form" model="Model" />
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
