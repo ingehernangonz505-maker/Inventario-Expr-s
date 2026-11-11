@@ -2,45 +2,43 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
+  dotnetSdkVersion: '10.0.x'
 
 steps:
 - task: UseDotNet@2
-  displayName: '1. Instalar .NET 10 SDK'
+  displayName: 'Instalar SDK de .NET 10'
   inputs:
     packageType: 'sdk'
-    version: '10.0.x'
-    includePreviewVersions: true
+    version: '$(dotnetSdkVersion)'
 
 - task: DotNetCoreCLI@2
-  displayName: '2. Restaurar dependencias NuGet'
+  displayName: 'Restaurar paquetes NuGet'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: '3. Compilar solución en Release'
+  displayName: 'Compilar proyecto'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --no-restore'
 
 - task: DotNetCoreCLI@2
-  displayName: '4. Empaquetar aplicación para Azure'
+  displayName: 'Publicar aplicación web'
   inputs:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-build'
     zipAfterPublish: true
 
-- task: AzureWebApp@1
-  displayName: '5. Desplegar en RG-VeterinariaWeb'
+- task: PublishBuildArtifacts@1
+  displayName: 'Guardar artefacto compilado'
   inputs:
-    azureSubscription: ''
-    appType: 'webApp'
-    appName: 'RG-VeterinariaWeb'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
