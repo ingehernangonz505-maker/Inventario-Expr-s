@@ -42,3 +42,14 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureWebApp@1
+  displayName: 'Desplegar en Azure Web App'
+  inputs:
+    azureSubscription: 'Azure for Students(364d5879-31ac-4cda-9324-764c8b01dc57)'
+    appType: 'webAppLinux'
+    appName: 'inventario-express-vet'
+    deployToSlotOrASE: false
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+
+
