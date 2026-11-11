@@ -47,7 +47,17 @@ steps:
   displayName: 'Desplegar en Azure Web App'
   inputs:
     azureSubscription: 'Azure for Students(364d5879-31ac-4cda-9324-764c8b01dc57)'
-    appType: 'webAppLinux'
-    appName: 'inventario-express-vet'
+    appType: 'webApp'
+    appName: 'RG-VeterinariaWeb'
     deployToSlotOrASE: false
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure for Students(1)(364d5879-31ac-4cda-9324-764c8b01dc57)'
+    appType: 'webApp'
+    appName: 'RG-VeterinariaWeb'
+    deployToSlotOrASE: true
+    resourceGroupName: 'RG-VeterinariaWeb_group'
+    slotName: 'production'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
