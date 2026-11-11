@@ -51,5 +51,3 @@ steps:
     appName: 'inventario-express-vet'
     deployToSlotOrASE: false
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-
-
